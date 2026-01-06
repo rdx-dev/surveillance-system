@@ -1,5 +1,5 @@
-import React from 'react';
-import './styles/index.scss';
+import React from "react";
+import "./styles/index.scss";
 
 const App: React.FC = () => {
   return (
@@ -9,9 +9,7 @@ const App: React.FC = () => {
           <h1 className="text-4xl font-bold text-primary-600 mb-2">
             🎥 Surveillance System
           </h1>
-          <p className="text-gray-600">
-            Shell App - Module Federation Host
-          </p>
+          <p className="text-gray-600">Shell App - Module Federation Host</p>
         </header>
 
         <main className="max-w-4xl mx-auto">
@@ -24,18 +22,22 @@ const App: React.FC = () => {
                 <span className="text-green-500 text-xl">✅</span>
                 <div>
                   <h3 className="font-semibold">React 18 + TypeScript</h3>
-                  <p className="text-gray-600 text-sm">Modern React with type safety</p>
+                  <p className="text-gray-600 text-sm">
+                    Modern React with type safety
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <span className="text-green-500 text-xl">✅</span>
                 <div>
                   <h3 className="font-semibold">Webpack Module Federation</h3>
-                  <p className="text-gray-600 text-sm">Ready to load remote MFEs</p>
+                  <p className="text-gray-600 text-sm">
+                    Ready to load remote MFEs
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <span className="text-green-500 text-xl">✅</span>
                 <div>
