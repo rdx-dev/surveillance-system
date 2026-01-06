@@ -4,10 +4,18 @@
   "description": "The main container application that hosts all micro frontends.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "micro-frontend",
+    "module-federation",
+    "react"
+  ],
+  "author": "singhcoderX",
   "license": "ISC",
   "dependencies": {
     "react": "^18.2.0",
