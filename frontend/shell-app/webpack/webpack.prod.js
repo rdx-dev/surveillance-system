@@ -6,14 +6,11 @@ const BundleAnalyzerPlugin =
 
 module.exports = {
   mode: "production",
-  // Use 'hidden-source-map' for security (keeps source maps for error tracking but hides from browser)
   devtool: "hidden-source-map",
 
-  // OPTIMIZATION SECTION - This is what you're missing!
   optimization: {
     minimize: true,
 
-    // JavaScript minification
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -28,8 +25,6 @@ module.exports = {
         },
         extractComments: false, // Don't extract comments to separate file
       }),
-
-      // CSS minification
       new CssMinimizerPlugin({
         minimizerOptions: {
           preset: [
@@ -42,34 +37,29 @@ module.exports = {
       }),
     ],
 
-    // Code splitting strategy
     splitChunks: {
-      chunks: "all", // Split both sync and async chunks
+      chunks: "all",
       cacheGroups: {
-        // Vendor chunk - separate node_modules
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          priority: 10, // Higher priority
+          priority: 10,
           reuseExistingChunk: true,
         },
-        // React and React-DOM separately (large libraries)
         react: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
           name: "react",
-          priority: 20, // Highest priority
+          priority: 20,
           reuseExistingChunk: true,
         },
-        // Common code shared across chunks
         common: {
-          minChunks: 2, // Code used in at least 2 chunks
+          minChunks: 2,
           priority: 5,
           reuseExistingChunk: true,
         },
       },
     },
 
-    // Separate runtime chunk for better caching
     runtimeChunk: "single",
   },
 

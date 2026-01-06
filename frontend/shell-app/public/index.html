@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Surveillance System - Smart CCTV Monitoring">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- Security Headers -->
+    <!-- Prevents MIME type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <!-- Prevents clickjacking - never allow framing -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    
+    <!-- XSS protection (legacy browser support) -->
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
+    <!-- Controls referrer information -->
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Content Security Policy -->
+    <!-- Adjust this based on your actual needs -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data: https:;
+        font-src 'self' data:;
+        connect-src 'self' https:;
+        frame-ancestors 'none';
+    ">
+    
     <title>Surveillance System</title>
 </head>
 <body>
+    <noscript>
+        <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+            <h1>JavaScript Required</h1>
+            <p>This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings.</p>
+        </div>
+    </noscript>
     <div id="root"></div>
 </body>
 </html>
