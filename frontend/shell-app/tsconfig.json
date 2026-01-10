@@ -21,7 +21,12 @@
       "@pages/*": ["src/pages/*"],
       "@services/*": ["src/services/*"],
       "@context/*": ["src/context/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "auth/*": ["auth/*"],
+      "liveFeed/*": ["liveFeed/*"],
+      "alert/*": ["alert/*"],
+      "dashboard/*": ["dashboard/*"],
+      "settings/*": ["settings/*"]
     }
   },
   "include": ["src/**/*"],
