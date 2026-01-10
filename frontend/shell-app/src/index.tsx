@@ -1,13 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+// Import bootstrap dynamically to allow Module Federation to initialize
+import("./bootstrap");
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// This file must be kept minimal - just the dynamic import
+export {};

@@ -51,6 +51,34 @@ module.exports = {
     ],
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: "shell",
+      filename: "remoteEntry.js",
+      remotes: {
+        auth: `auth@${process.env.AUTH_APP_PUBLIC_PATH}/remoteEntry.js`,
+        liveFeed: `liveFeed@${process.env.LIVE_FEED_APP_PUBLIC_PATH}/remoteEntry.js`,
+        alert: `alert@${process.env.ALERT_APP_PUBLIC_PATH}/remoteEntry.js`,
+        dashboard: `dashboard@${process.env.DASHBOARD_APP_PUBLIC_PATH}/remoteEntry.js`,
+        settings: `settings@${process.env.SETTINGS_APP_PUBLIC_PATH}/remoteEntry.js`,
+      },
+      shared: {
+        react: {
+          singleton: true,
+          requiredVersion: "^18.2.0",
+          eager: false,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: "^18.2.0",
+          eager: false,
+        },
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: "^6.20.1",
+          eager: false,
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       title: "Typescript",
       filename: "index.html",
