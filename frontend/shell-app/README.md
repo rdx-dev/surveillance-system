@@ -1,91 +1,64 @@
-# Shell App (Container)
+cat > README.md << 'EOF'
 
-The main container application that hosts all micro frontends.
+# Shell App - Module Federation Host
 
-## Port
+The main container application that hosts all micro frontends using Webpack Module Federation.
 
-3005
+## 🏗️ Architecture
 
-## Purpose
+**Role:** Module Federation HOST  
+**Port:** 3000  
+**Purpose:** Load and orchestrate remote MFEs
 
-- Acts as the Module Federation host
-- Manages routing between MFEs
-- Provides shared layout (navigation, header, footer)
-- Manages shared state (auth context)
+## 🔌 Remote MFEs
 
-## Getting Started
+| MFE           | Port | Remote Name | Exposed Components       |
+| ------------- | ---- | ----------- | ------------------------ |
+| Auth MFE      | 3001 | `auth`      | LoginPage, SignupPage    |
+| Live Feed MFE | 3002 | `liveFeed`  | LiveFeed, VideoPlayer    |
+| Alert MFE     | 3003 | `alert`     | AlertList, AlertCard     |
+| Dashboard MFE | 3004 | `dashboard` | Dashboard                |
+| Settings MFE  | 3005 | `settings`  | Settings, CameraSettings |
 
-### Prerequisites
+## 🚀 Running
 
-- Node.js (v18.17.0 or higher)
-- npm (v9.6.7 or higher)
-
-### Installation
-
+```bash
+# Install dependencies
 npm install
 
-## Available Scripts
+# Start development server
+npm start  # http://localhost:3000
 
-### Development
-
-npm run dev
-
-Starts the development server with hot module replacement (HMR) on port 3005.
-
-### Production Build
-
-npm run build
-
-Creates an optimized production build in the `dist` directory with:
-
-- Code minification and tree shaking
-- Code splitting (vendor, React, and app chunks)
-- CSS extraction and optimization
-- Source maps (hidden for security)
-
-### Code Formatting
-
-npm run format
-
-Formats all source files using Prettier. This command formats:
-
-- TypeScript files (`.ts`, `.tsx`)
-- JavaScript files (`.js`, `.jsx`)
-- JSON files (`.json`)
-- CSS and SCSS files (`.css`, `.scss`)
-- Markdown files (`.md`)
-
-**Note:** This command modifies files in place. Make sure to commit your changes before running it, or use version control to review the changes.
-
-### Type Checking
-
+# Type check
 npm run type-check
 
-Runs TypeScript compiler to check for type errors without emitting files.
+# Build for production
+npm run build
+```
 
-### Clean Build
+## 📦 Module Federation Configuration
 
-npm run clean
+### Shared Dependencies
 
-Removes the `dist` directory and all build artifacts.
+- react (singleton)
+- react-dom (singleton)
+- react-router-dom (singleton)
 
-## Code Quality
+### Remote Loading Strategy
 
-This project uses:
+- Lazy loading with `React.lazy()`
+- Graceful fallback if remote is unavailable
+- Error boundaries for remote failures
 
-- **Prettier** for code formatting
-- **TypeScript** for type safety
-- **ESLint** (recommended for future setup)
+## 🔧 Technologies
 
-### Formatting Configuration
+- React 18.2
+- TypeScript 5.3
+- Webpack 5 (Module Federation)
+- React Router 6
+- Tailwind CSS 3
 
-Prettier configuration is defined in `.prettierrc`. The project uses:
+## 📖 Documentation
 
-- 2 spaces for indentation
-- Double quotes
-- Semicolons
-- 80 character line width
-- ES5 trailing commas
-
-To format your code before committing:
-npm run format
+- [Module Federation Docs](https://webpack.js.org/concepts/module-federation/)
+- [Project Documentation](../../docs/)
