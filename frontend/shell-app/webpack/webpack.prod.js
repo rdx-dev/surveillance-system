@@ -41,20 +41,9 @@ module.exports = {
       chunks: "all",
       cacheGroups: {
         vendor: {
-          test: /[\\/]node_modules[\\/]/,
+          test: /[\\/]node_modules[\\/](?!react|react-dom|react-router-dom)/,
           name: "vendors",
           priority: 10,
-          reuseExistingChunk: true,
-        },
-        react: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "react",
-          priority: 20,
-          reuseExistingChunk: true,
-        },
-        common: {
-          minChunks: 2,
-          priority: 5,
           reuseExistingChunk: true,
         },
       },
@@ -79,8 +68,8 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "styles/[name][contenthash].css",
-      chunkFilename: "styles/[id][contenthash].css", // Enable for code-split CSS
+      filename: "styles/[name]-[contenthash].css",
+      chunkFilename: "styles/[id]-[contenthash].css", // Enable for code-split CSS
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: "static",

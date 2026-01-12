@@ -1,36 +1,35 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin =
+  require("webpack").container.ModuleFederationPlugin;
 require("dotenv").config({ path: path.resolve(__dirname, "../../../.env") });
 
-const PORT = process.env.SHELL_APP_PORT || 3000;
-const PUBLIC_PATH =
-  process.env.SHELL_APP_PUBLIC_PATH || `http://localhost:${PORT}/`;
+const requiredEnvVars = [
+  "SHELL_APP_PORT",
+  "SHELL_APP_PUBLIC_PATH",
+  "AUTH_APP_PUBLIC_PATH",
+  "LIVE_FEED_APP_PUBLIC_PATH",
+  "ALERT_APP_PUBLIC_PATH",
+  "DASHBOARD_APP_PUBLIC_PATH",
+  "SETTINGS_APP_PUBLIC_PATH",
+];
+
+requiredEnvVars.forEach((envVar) => {
+  if (!process.env[envVar]) {
+    throw new Error(`Missing required environment variable: ${envVar}`);
+  }
+});
+
+const PUBLIC_PATH = process.env.SHELL_APP_PUBLIC_PATH;
 
 module.exports = {
   entry: { bundle: path.resolve(__dirname, "../src/index.tsx") },
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "js/main[name][contenthash].js",
+    filename: "js/main-[name]-[contenthash].js",
     clean: true,
-    assetModuleFilename: "[name][ext]",
+    assetModuleFilename: "[name]-[ext]",
     publicPath: PUBLIC_PATH,
-  },
-  devtool: "source-map", // helps to debug in chrome in sources tab
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, "../dist"),
-    },
-    port: PORT,
-    open: true,
-    hot: true, //hot reloading
-    compress: true, // enable Z-zip compression
-    historyApiFallback: true /*ensures that the server serves the entry
-                                point of the SPA for all URLs, allowing the client-side
-                                routing to manage the navigation within the application.
-                              */,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
   },
   module: {
     rules: [
@@ -45,7 +44,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i, // i -> case insensitive
         type: "asset/resource",
         generator: {
-          filename: "images/[name][ext]",
+          filename: "images/[name]-[ext]",
         },
       },
     ],
@@ -55,27 +54,30 @@ module.exports = {
       name: "shell",
       filename: "remoteEntry.js",
       remotes: {
-        auth: `auth@${process.env.AUTH_APP_PUBLIC_PATH}/remoteEntry.js`,
-        liveFeed: `liveFeed@${process.env.LIVE_FEED_APP_PUBLIC_PATH}/remoteEntry.js`,
-        alert: `alert@${process.env.ALERT_APP_PUBLIC_PATH}/remoteEntry.js`,
-        dashboard: `dashboard@${process.env.DASHBOARD_APP_PUBLIC_PATH}/remoteEntry.js`,
-        settings: `settings@${process.env.SETTINGS_APP_PUBLIC_PATH}/remoteEntry.js`,
+        auth: `auth@${process.env.AUTH_APP_PUBLIC_PATH}remoteEntry.js`,
+        liveFeed: `liveFeed@${process.env.LIVE_FEED_APP_PUBLIC_PATH}remoteEntry.js`,
+        alert: `alert@${process.env.ALERT_APP_PUBLIC_PATH}remoteEntry.js`,
+        dashboard: `dashboard@${process.env.DASHBOARD_APP_PUBLIC_PATH}remoteEntry.js`,
+        settings: `settings@${process.env.SETTINGS_APP_PUBLIC_PATH}remoteEntry.js`,
       },
       shared: {
         react: {
           singleton: true,
           requiredVersion: "^18.2.0",
           eager: false,
+          strictVersion: process.env.NODE_ENV === "production",
         },
         "react-dom": {
           singleton: true,
           requiredVersion: "^18.2.0",
           eager: false,
+          strictVersion: process.env.NODE_ENV === "production",
         },
         "react-router-dom": {
           singleton: true,
           requiredVersion: "^6.20.0",
           eager: false,
+          strictVersion: process.env.NODE_ENV === "production",
         },
       },
     }),
