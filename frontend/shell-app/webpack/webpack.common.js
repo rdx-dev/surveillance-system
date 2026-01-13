@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 require("dotenv").config({ path: path.resolve(__dirname, "../../../.env") });
 
 const requiredEnvVars = [
@@ -87,5 +88,12 @@ module.exports = {
       template: path.resolve(__dirname, "../public/index.html"),
     }),
   ],
-  resolve: { extensions: [".ts", ".js", ".tsx"] }, // we don't need to write App.tsx while importing
+  resolve: {
+    extensions: [".ts", ".js", ".tsx"],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, "../tsconfig.json"),
+      }),
+    ],
+  },
 };
