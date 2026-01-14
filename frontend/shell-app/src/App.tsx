@@ -7,6 +7,7 @@ import Footer from "@components/Footer";
 import Loading from "@components/Loading";
 import { logger } from "@utils/logger";
 import { MFE_NAMES, PORTS, ROUTES } from "@utils/constants";
+import { STRINGS } from "@utils/strings";
 import ErrorBoundary from "@boundaries/ErrorBoundary";
 import { AuthProvider } from "@context/AuthContext";
 // Lazy load remote components with error handling
@@ -16,7 +17,7 @@ const createLazyRemote = (
 ) => {
   return lazy(() =>
     importFn().catch((error) => {
-      logger.warn("Failed to load remote MFE:", error.message);
+      logger.warn(STRINGS.logger.failedToLoadRemote, error.message);
       return { default: fallbackComponent };
     })
   );
@@ -27,10 +28,10 @@ const LoginPage = createLazyRemote(
   () => import("auth/LoginPage"),
   () => (
     <PlaceholderPage
-      name="Login Page"
+      name={STRINGS.mfe.auth.loginPage}
       mfeName={MFE_NAMES.AUTH}
       port={PORTS.AUTH_MFE}
-      description="Authentication micro frontend for user login"
+      description={STRINGS.mfe.auth.description}
     />
   )
 );
@@ -39,10 +40,10 @@ const SignupPage = createLazyRemote(
   () => import("auth/SignupPage"),
   () => (
     <PlaceholderPage
-      name="Signup Page"
+      name={STRINGS.mfe.auth.signupPage}
       mfeName={MFE_NAMES.AUTH}
       port={PORTS.AUTH_MFE}
-      description="Authentication micro frontend for user registration"
+      description={STRINGS.mfe.auth.signupDescription}
     />
   )
 );
@@ -51,10 +52,10 @@ const Dashboard = createLazyRemote(
   () => import("dashboard/Dashboard"),
   () => (
     <PlaceholderPage
-      name="Dashboard"
+      name={STRINGS.mfe.dashboard.name}
       mfeName={MFE_NAMES.DASHBOARD}
       port={PORTS.DASHBOARD_MFE}
-      description="Main dashboard with system overview and statistics"
+      description={STRINGS.mfe.dashboard.description}
     />
   )
 );
@@ -63,10 +64,10 @@ const LiveFeed = createLazyRemote(
   () => import("liveFeed/LiveFeed"),
   () => (
     <PlaceholderPage
-      name="Live Feed"
+      name={STRINGS.mfe.liveFeed.name}
       mfeName={MFE_NAMES.LIVE_FEED}
       port={PORTS.LIVE_FEED_MFE}
-      description="Real-time CCTV feed viewer with AI detection overlay"
+      description={STRINGS.mfe.liveFeed.description}
     />
   )
 );
@@ -75,10 +76,10 @@ const AlertList = createLazyRemote(
   () => import("alert/AlertList"),
   () => (
     <PlaceholderPage
-      name="Alerts"
+      name={STRINGS.mfe.alert.name}
       mfeName={MFE_NAMES.ALERT}
       port={PORTS.ALERT_MFE}
-      description="Alert management and notification center"
+      description={STRINGS.mfe.alert.description}
     />
   )
 );
@@ -87,10 +88,10 @@ const Settings = createLazyRemote(
   () => import("settings/Settings"),
   () => (
     <PlaceholderPage
-      name="Settings"
+      name={STRINGS.mfe.settings.name}
       mfeName={MFE_NAMES.SETTINGS}
       port={PORTS.SETTINGS_MFE}
-      description="System settings and camera configuration"
+      description={STRINGS.mfe.settings.description}
     />
   )
 );
@@ -100,11 +101,9 @@ const HomePage: React.FC = () => (
   <div className="max-w-6xl mx-auto">
     <div className="text-center mb-12">
       <h1 className="text-5xl font-bold text-gray-900 mb-4">
-        Welcome to Surveillance System 🎥
+        {STRINGS.app.welcome}
       </h1>
-      <p className="text-xl text-gray-600">
-        AI-Powered Security Monitoring Platform
-      </p>
+      <p className="text-xl text-gray-600">{STRINGS.app.description}</p>
     </div>
 
     {/* Status Cards */}
@@ -115,24 +114,32 @@ const HomePage: React.FC = () => (
           <div className="text-4xl">🔌</div>
           <div className="flex-1">
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Module Federation
+              {STRINGS.home.moduleFederation.title}
             </h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">HOST Configured</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.moduleFederation.hostConfigured}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">5 Remotes Registered</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.moduleFederation.remotesRegistered}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">Shared Dependencies</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.moduleFederation.sharedDependencies}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">Error Boundaries</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.moduleFederation.errorBoundaries}
+                </span>
               </div>
             </div>
           </div>
@@ -145,24 +152,32 @@ const HomePage: React.FC = () => (
           <div className="text-4xl">🏗️</div>
           <div className="flex-1">
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Architecture
+              {STRINGS.home.architecture.title}
             </h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">React 18 + TypeScript</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.architecture.reactTypescript}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">React Router v6</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.architecture.reactRouter}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">Tailwind CSS</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.architecture.tailwind}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-green-500">✅</span>
-                <span className="text-gray-700">Context API</span>
+                <span className="text-gray-700">
+                  {STRINGS.home.architecture.contextApi}
+                </span>
               </div>
             </div>
           </div>
@@ -173,15 +188,24 @@ const HomePage: React.FC = () => (
     {/* MFE Status Grid */}
     <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
       <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-        Micro Frontend Status
+        {STRINGS.home.mfeStatus.title}
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {[
-          { name: "Auth MFE", port: 3001, status: "pending" },
-          { name: "Live Feed MFE", port: 3002, status: "pending" },
-          { name: "Alert MFE", port: 3003, status: "pending" },
-          { name: "Dashboard MFE", port: 3004, status: "pending" },
-          { name: "Settings MFE", port: 3005, status: "pending" },
+          { name: STRINGS.home.mfeStatus.authMfe, port: PORTS.AUTH_MFE },
+          {
+            name: STRINGS.home.mfeStatus.liveFeedMfe,
+            port: PORTS.LIVE_FEED_MFE,
+          },
+          { name: STRINGS.home.mfeStatus.alertMfe, port: PORTS.ALERT_MFE },
+          {
+            name: STRINGS.home.mfeStatus.dashboardMfe,
+            port: PORTS.DASHBOARD_MFE,
+          },
+          {
+            name: STRINGS.home.mfeStatus.settingsMfe,
+            port: PORTS.SETTINGS_MFE,
+          },
         ].map((mfe) => (
           <div key={mfe.port} className="border border-gray-200 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
@@ -189,9 +213,12 @@ const HomePage: React.FC = () => (
               <span className="text-yellow-500 text-xl">⏳</span>
             </div>
             <div className="text-sm text-gray-600">
-              Port: <span className="font-mono">{mfe.port}</span>
+              {STRINGS.home.mfeStatus.port}:{" "}
+              <span className="font-mono">{mfe.port}</span>
             </div>
-            <div className="text-xs text-yellow-600 mt-2">Not Built Yet</div>
+            <div className="text-xs text-yellow-600 mt-2">
+              {STRINGS.home.mfeStatus.notBuiltYet}
+            </div>
           </div>
         ))}
       </div>
@@ -199,19 +226,32 @@ const HomePage: React.FC = () => (
 
     {/* Quick Actions */}
     <div className="bg-gradient-to-r from-primary-500 to-primary-700 rounded-lg shadow-lg p-8 text-white">
-      <h3 className="text-2xl font-semibold mb-4">Test Navigation</h3>
+      <h3 className="text-2xl font-semibold mb-4">
+        {STRINGS.home.testNavigation.title}
+      </h3>
       <p className="mb-6 opacity-90">
-        Click any button below to test Module Federation loading (will show
-        placeholders until MFEs are built)
+        {STRINGS.home.testNavigation.description}
       </p>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {[
-          { to: ROUTES.LOGIN, label: "Login", icon: "🔐" },
-          { to: ROUTES.SIGNUP, label: "Sign Up", icon: "📝" },
-          { to: ROUTES.DASHBOARD, label: "Dashboard", icon: "📊" },
-          { to: ROUTES.LIVE_FEED, label: "Live Feed", icon: "📹" },
-          { to: ROUTES.ALERTS, label: "Alerts", icon: "🚨" },
-          { to: ROUTES.SETTINGS, label: "Settings", icon: "⚙️" },
+          { to: ROUTES.LOGIN, label: STRINGS.navigation.login, icon: "🔐" },
+          { to: ROUTES.SIGNUP, label: STRINGS.navigation.signUp, icon: "📝" },
+          {
+            to: ROUTES.DASHBOARD,
+            label: STRINGS.navigation.dashboard,
+            icon: "📊",
+          },
+          {
+            to: ROUTES.LIVE_FEED,
+            label: STRINGS.navigation.liveFeed,
+            icon: "📹",
+          },
+          { to: ROUTES.ALERTS, label: STRINGS.navigation.alerts, icon: "🚨" },
+          {
+            to: ROUTES.SETTINGS,
+            label: STRINGS.navigation.settings,
+            icon: "⚙️",
+          },
         ].map((link) => (
           <a
             key={link.to}
@@ -228,14 +268,14 @@ const HomePage: React.FC = () => (
     {/* Milestone Progress */}
     <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
       <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-        Milestone 1 Progress
+        {STRINGS.home.milestone.title}
       </h3>
       <div className="space-y-3">
         {[
-          { task: "Task 1-2: Repository & Structure", done: true },
-          { task: "Task 3-4: Configuration & Environment", done: true },
-          { task: "Task 5-6: Shell App & Module Federation", done: true },
-          { task: "Task 7-8: Components & Testing", done: true },
+          { task: STRINGS.home.milestone.task1, done: true },
+          { task: STRINGS.home.milestone.task2, done: true },
+          { task: STRINGS.home.milestone.task3, done: true },
+          { task: STRINGS.home.milestone.task4, done: true },
         ].map((item, idx) => (
           <div key={idx} className="flex items-center space-x-3">
             <span className="text-xl">{item.done ? "✅" : "⏳"}</span>
@@ -248,9 +288,11 @@ const HomePage: React.FC = () => (
       <div className="mt-6 pt-6 border-t">
         <div className="flex items-center justify-between">
           <span className="text-gray-700 font-semibold">
-            Milestone 1: Complete! 🎉
+            {STRINGS.home.milestone.complete}
           </span>
-          <span className="text-green-600 font-bold">100%</span>
+          <span className="text-green-600 font-bold">
+            {STRINGS.home.milestone.progress}
+          </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-3 mt-3">
           <div className="bg-green-600 h-3 rounded-full w-full"></div>
@@ -265,22 +307,24 @@ const NotFoundPage: React.FC = () => (
   <div className="flex items-center justify-center min-h-[500px]">
     <div className="text-center">
       <div className="text-8xl mb-4">404</div>
-      <h2 className="text-3xl font-bold text-gray-800 mb-4">Page Not Found</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">
+        {STRINGS.errors.pageNotFound}
+      </h2>
       <p className="text-gray-600 mb-8">
-        The page you're looking for doesn't exist.
+        {STRINGS.errors.pageNotFoundDescription}
       </p>
       <a
         href={ROUTES.HOME}
         className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors inline-block"
       >
-        Go to Home
+        {STRINGS.actions.goToHome}
       </a>
     </div>
   </div>
 );
 
 const App: React.FC = () => {
-  logger.info("Shell App initialized");
+  logger.info(STRINGS.logger.shellAppInitialized);
 
   return (
     <ErrorBoundary>
@@ -290,7 +334,7 @@ const App: React.FC = () => {
             <Navigation />
 
             <main className="flex-1 container mx-auto px-4 py-8">
-              <Suspense fallback={<Loading message="Loading module..." />}>
+              <Suspense fallback={<Loading message={STRINGS.loading.module} />}>
                 <Routes>
                   <Route path={ROUTES.HOME} element={<HomePage />} />
                   <Route path={ROUTES.LOGIN} element={<LoginPage />} />

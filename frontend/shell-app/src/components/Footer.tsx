@@ -1,3 +1,6 @@
+import { STRINGS, formatString } from "@/utils/strings";
+import { PORTS } from "@/utils/constants";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -8,18 +11,17 @@ const Footer = () => {
           {/* About */}
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              About Surveillance System
+              {STRINGS.footer.about.title}
             </h3>
             <p className="text-gray-600 text-sm">
-              An intelligent CCTV monitoring system powered by AI for automated
-              security surveillance and real-time threat detection.
+              {STRINGS.footer.about.description}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              Quick Links
+              {STRINGS.footer.quickLinks.title}
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -27,7 +29,7 @@ const Footer = () => {
                   href="/dashboard"
                   className="text-gray-600 hover:text-primary-600"
                 >
-                  Dashboard
+                  {STRINGS.navigation.dashboard}
                 </a>
               </li>
               <li>
@@ -35,7 +37,7 @@ const Footer = () => {
                   href="/live-feed"
                   className="text-gray-600 hover:text-primary-600"
                 >
-                  Live Feed
+                  {STRINGS.navigation.liveFeed}
                 </a>
               </li>
               <li>
@@ -43,7 +45,7 @@ const Footer = () => {
                   href="/alerts"
                   className="text-gray-600 hover:text-primary-600"
                 >
-                  Alerts
+                  {STRINGS.navigation.alerts}
                 </a>
               </li>
               <li>
@@ -51,7 +53,7 @@ const Footer = () => {
                   href="/settings"
                   className="text-gray-600 hover:text-primary-600"
                 >
-                  Settings
+                  {STRINGS.navigation.settings}
                 </a>
               </li>
             </ul>
@@ -60,23 +62,23 @@ const Footer = () => {
           {/* Tech Stack */}
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              Technology
+              {STRINGS.footer.technology.title}
             </h3>
             <div className="flex flex-wrap gap-2">
               <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
-                React 18
+                {STRINGS.footer.technology.react18}
               </span>
               <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
-                TypeScript
+                {STRINGS.footer.technology.typescript}
               </span>
               <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">
-                Module Federation
+                {STRINGS.footer.technology.moduleFederation}
               </span>
               <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">
-                Spring Boot
+                {STRINGS.footer.technology.springBoot}
               </span>
               <span className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded">
-                YOLOv8
+                {STRINGS.footer.technology.yolov8}
               </span>
             </div>
           </div>
@@ -85,11 +87,12 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t mt-8 pt-6 text-center text-gray-500 text-sm">
           <p>
-            © {currentYear} Surveillance System. Built with Module Federation.
+            {formatString(STRINGS.footer.copyright.base, { year: currentYear })}
           </p>
           <p className="mt-2">
-            <span className="font-semibold">Shell App</span> (HOST) running on{" "}
-            <span className="text-primary-600 font-mono">Port 3000</span>
+            {formatString(STRINGS.footer.copyright.shellApp, {
+              port: PORTS.SHELL.toString(),
+            })}
           </p>
         </div>
       </div>

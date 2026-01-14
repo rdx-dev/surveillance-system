@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { STRINGS } from "@/utils/strings";
 
 interface PlaceholderPageProps {
   name: string;
@@ -20,26 +21,30 @@ const PlaceholderPage: React.FC<PlaceholderPageProps> = ({
         <div className="text-center mb-6">
           <div className="text-7xl mb-4">⏳</div>
           <h2 className="text-3xl font-bold text-gray-800 mb-2">{name}</h2>
-          <p className="text-gray-500">Coming Soon</p>
+          <p className="text-gray-500">{STRINGS.mfe.status.comingSoon}</p>
         </div>
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
           <h3 className="font-semibold text-blue-900 mb-2">
-            Micro Frontend Status
+            {STRINGS.mfe.status.title}
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">MFE Name:</span>
+              <span className="text-gray-600">
+                {STRINGS.mfe.status.mfeName}:
+              </span>
               <span className="font-mono text-blue-700">{mfeName}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Port:</span>
+              <span className="text-gray-600">{STRINGS.mfe.status.port}:</span>
               <span className="font-mono text-blue-700">{port}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Status:</span>
+              <span className="text-gray-600">
+                {STRINGS.mfe.status.status}:
+              </span>
               <span className="text-yellow-600 font-semibold">
-                Not Built Yet
+                {STRINGS.mfe.status.notBuiltYet}
               </span>
             </div>
           </div>
@@ -51,12 +56,10 @@ const PlaceholderPage: React.FC<PlaceholderPageProps> = ({
 
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
           <h4 className="font-semibold text-gray-800 mb-2 text-sm">
-            When will this be available?
+            {STRINGS.mfe.status.whenAvailable}
           </h4>
           <p className="text-gray-600 text-sm">
-            This micro frontend will be built in upcoming tasks. Module
-            Federation is configured and ready to load this remote as soon as
-            it's deployed.
+            {STRINGS.mfe.status.whenAvailableDescription}
           </p>
         </div>
 
@@ -65,7 +68,7 @@ const PlaceholderPage: React.FC<PlaceholderPageProps> = ({
             to="/"
             className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
           >
-            ← Back to Home
+            {STRINGS.actions.backToHome}
           </Link>
         </div>
       </div>

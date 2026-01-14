@@ -1,4 +1,5 @@
 import { ROUTES } from "@/utils/constants";
+import { STRINGS } from "@/utils/strings";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -26,9 +27,11 @@ const Navigation: React.FC = () => {
             <span className="text-3xl">🎥</span>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-primary-600">
-                Surveillance System
+                {STRINGS.app.name}
               </span>
-              <span className="text-xs text-gray-500">Shell App - Host</span>
+              <span className="text-xs text-gray-500">
+                {STRINGS.app.shellAppLabel}
+              </span>
             </div>
           </Link>
 
@@ -38,22 +41,22 @@ const Navigation: React.FC = () => {
               to={ROUTES.DASHBOARD}
               className={`${navLinkClass("/dashboard")} py-2`}
             >
-              Dashboard
+              {STRINGS.navigation.dashboard}
             </Link>
             <Link
               to={ROUTES.LIVE_FEED}
               className={`${navLinkClass("/live-feed")} py-2`}
             >
-              Live Feed
+              {STRINGS.navigation.liveFeed}
             </Link>
             <Link to="/alerts" className={`${navLinkClass("/alerts")} py-2`}>
-              Alerts
+              {STRINGS.navigation.alerts}
             </Link>
             <Link
               to={ROUTES.SETTINGS}
               className={`${navLinkClass("/settings")} py-2`}
             >
-              Settings
+              {STRINGS.navigation.settings}
             </Link>
           </div>
 
@@ -63,13 +66,13 @@ const Navigation: React.FC = () => {
               to={ROUTES.LOGIN}
               className="px-4 py-2 text-gray-600 hover:text-primary-600 transition-colors"
             >
-              Login
+              {STRINGS.navigation.login}
             </Link>
             <Link
               to={ROUTES.SIGNUP}
               className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
             >
-              Sign Up
+              {STRINGS.navigation.signUp}
             </Link>
           </div>
         </div>

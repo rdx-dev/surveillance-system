@@ -1,3 +1,4 @@
+import { STRINGS } from "@/utils/strings";
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
@@ -48,10 +49,10 @@ class ErrorBoundary extends Component<Props, State> {
           <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
             <div className="text-6xl mb-4">⚠️</div>
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
-              Oops! Something went wrong
+              {STRINGS.errors.boundary.title}
             </h2>
             <p className="text-gray-600 mb-6">
-              {this.state.error?.message || "An unexpected error occurred"}
+              {this.state.error?.message || STRINGS.errors.boundary.message}
             </p>
 
             <div className="space-y-3">
@@ -59,19 +60,19 @@ class ErrorBoundary extends Component<Props, State> {
                 onClick={this.handleReset}
                 className="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
               >
-                Try Again
+                {STRINGS.actions.tryAgain}
               </button>
 
               <button
                 onClick={() => (window.location.href = "/")}
                 className="w-full px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
               >
-                Go to Home
+                {STRINGS.actions.goToHome}
               </button>
             </div>
 
             <p className="mt-6 text-xs text-gray-500">
-              If this problem persists, please contact support.
+              {STRINGS.errors.contactSupport}
             </p>
           </div>
         </div>

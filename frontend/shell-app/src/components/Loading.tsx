@@ -1,8 +1,10 @@
+import { STRINGS } from "@/utils/strings";
+
 interface LoadingProps {
   message?: string;
 }
 
-const Loading = ({ message = "Loading..." }: LoadingProps) => {
+const Loading = ({ message = STRINGS.loading.default }: LoadingProps) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[400px]">
       <div className="relative">
@@ -16,7 +18,7 @@ const Loading = ({ message = "Loading..." }: LoadingProps) => {
       </div>
 
       <p className="mt-6 text-gray-600 font-medium">{message}</p>
-      <p className="mt-2 text-gray-400 text-sm">Please wait...</p>
+      <p className="mt-2 text-gray-400 text-sm">{STRINGS.loading.pleaseWait}</p>
     </div>
   );
 };
